@@ -7,23 +7,37 @@ import java.sql.*;
  */
 public class DbConnectionProvider {
     /**
-     * Les informations de connexion à la base de données
+     * La connexion elle-même
+     */
+    private Connection connection;
+    /**
+     * L'url de connexion à la base de données
      */
     private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
-    private static final String USERNAME = "sys as sysdba";
+    /**
+     * Le nom d'utilisateur de connexion à la base de données
+     */
+    private static final String USERNAME = "GestionGarderie";
+    /**
+     * Le mot de passe de connexion à la base de données
+     */
     private static final String PASSWORD = "123";
 
-    /**
-     * La méthode statique qui retourne la connexion ou null si une erreur se produit
-     * @return Connection
-     */
-    public static Connection getConnection()
-    {
+    public DbConnectionProvider(){
         try {
-            return DriverManager.getConnection(URL, USERNAME, PASSWORD);
+           this.connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+//            System.out.println("Connexion succes");
         } catch (SQLException e) {
             System.err.println("Echec de connexion : " +e.getMessage());
         }
-        return null;
+    }
+
+    /**
+     * La méthode statique qui retourne la connexion
+     * @return Connection
+     */
+    public Connection getConnection()
+    {
+        return this.connection;
     }
 }

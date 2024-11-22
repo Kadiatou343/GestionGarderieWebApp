@@ -7,10 +7,10 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class ParentDAO {
-    private Connection connection = DbConnectionProvider.getConnection();
+    private final Connection connection = new DbConnectionProvider().getConnection();
     private PreparedStatement pst;
     private ResultSet rs;
-    private String tableName = "Parents";
+    private final String tableName = "Parents";
 
     public ArrayList<Parent> getAll() {
         ArrayList<Parent> parents = new ArrayList<>();

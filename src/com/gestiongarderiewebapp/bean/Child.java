@@ -19,15 +19,11 @@ public class Child implements AssigningSection {
     /**
      * L'âge de l'enfant
      */
-    private String childAge;
+    private int childAge;
     /**
      * Le parent responsable de l'enfant
      */
     private Parent parent;
-    /**
-     * La garderie dans laquelle est enregistré l'enfant
-     */
-    private Garderie garderie;
 
     /**
      * Constructeur orienté coté code
@@ -36,14 +32,12 @@ public class Child implements AssigningSection {
      * @param childFirstName Le prénom de l'enfant
      * @param childAge       L'âge de l'enfant
      * @param parent         Le parent responsable de l'enfant
-     * @param garderie       La garderie dans laquelle l'enfant est enregistré
      */
-    public Child(String childLastName, String childFirstName, String childAge, Parent parent, Garderie garderie) {
+    public Child(String childLastName, String childFirstName, int childAge, Parent parent) {
         this.childLastName = childLastName;
         this.childFirstName = childFirstName;
         this.childAge = childAge;
         this.parent = parent;
-        this.garderie = garderie;
     }
 
     /**
@@ -54,15 +48,13 @@ public class Child implements AssigningSection {
      * @param childFirstName Le prénom de l'enfant
      * @param childAge       L'âge de l'enfant
      * @param parent         Le parent responsable de l'enfant
-     * @param garderie       La garderie dans laquelle l'enfant est enregistré
      */
-    public Child(int numChild, String childLastName, String childFirstName, String childAge, Parent parent, Garderie garderie) {
+    public Child(int numChild, String childLastName, String childFirstName, int childAge, Parent parent) {
         this.numChild = numChild;
         this.childLastName = childLastName;
         this.childFirstName = childFirstName;
         this.childAge = childAge;
         this.parent = parent;
-        this.garderie = garderie;
     }
 
     //region Getters et Setters
@@ -91,11 +83,11 @@ public class Child implements AssigningSection {
         this.childFirstName = childFirstName;
     }
 
-    public String getChildAge() {
+    public int getChildAge() {
         return childAge;
     }
 
-    public void setChildAge(String childAge) {
+    public void setChildAge(int childAge) {
         this.childAge = childAge;
     }
 
@@ -107,13 +99,6 @@ public class Child implements AssigningSection {
         this.parent = parent;
     }
 
-    public Garderie getGarderie() {
-        return garderie;
-    }
-
-    public void setGarderie(Garderie garderie) {
-        this.garderie = garderie;
-    }
     //endregion
 
     /**

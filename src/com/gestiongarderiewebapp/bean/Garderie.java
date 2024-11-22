@@ -17,7 +17,7 @@ public class Garderie {
     /**
      * La capacité d'accueil de la garderie
      */
-    private String capGard;
+    private int capGard;
     /**
      * La liste des enfants de la garderie
      */
@@ -33,7 +33,7 @@ public class Garderie {
      * @param nameGard Le nom de la garderie
      * @param capGard  La capacité d'accueil de la garderie
      */
-    public Garderie(String nameGard, String capGard) {
+    public Garderie(String nameGard, int capGard) {
         this.nameGard = nameGard;
         this.capGard = capGard;
     }
@@ -45,7 +45,7 @@ public class Garderie {
      * @param nameGard Le nom de la garderie
      * @param capGard  La capacité d'accueil de la garderie
      */
-    public Garderie(int idGard, String nameGard, String capGard) {
+    public Garderie(int idGard, String nameGard, int capGard) {
         this.idGard = idGard;
         this.nameGard = nameGard;
         this.capGard = capGard;
@@ -69,11 +69,11 @@ public class Garderie {
         this.nameGard = nameGard;
     }
 
-    public String getCapGard() {
+    public int getCapGard() {
         return capGard;
     }
 
-    public void setCapGard(String capGard) {
+    public void setCapGard(int capGard) {
         this.capGard = capGard;
     }
 

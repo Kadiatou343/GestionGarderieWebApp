@@ -79,7 +79,7 @@ public class Inscription {
      */
     @Override
     public String toString() {
-        return "Inscription N \n" +
+        return "Inscription: \n" +
                 this.child.toString() +
                 "\n" + this.employee.toString() +
                 "\nDate Inscription : " + this.inscriptionDate;

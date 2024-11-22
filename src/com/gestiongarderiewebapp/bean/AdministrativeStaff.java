@@ -71,6 +71,6 @@ public class AdministrativeStaff extends Employee {
     public String toString() {
         return super.toString() +
                 "\tTéléphone : " + this.phoneNumber +
-                "\tEmail Pro : " + this.emailProf;
+                "\tEmail Prof : " + this.emailProf;
     }
 }

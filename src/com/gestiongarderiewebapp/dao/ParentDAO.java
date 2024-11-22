@@ -12,7 +12,12 @@ public class ParentDAO {
     private ResultSet rs;
     private final String tableName = "Parents";
 
-    public ArrayList<Parent> getAll() {
+    /**
+     * Obtenir tous les tuples de la table
+     *
+     * @return ArrayList
+     */
+    public ArrayList<Parent> getAllParents() {
         ArrayList<Parent> parents = new ArrayList<>();
         try {
             pst = connection.prepareStatement("SELECT * FROM " + this.tableName);
@@ -28,8 +33,13 @@ public class ParentDAO {
         return parents;
     }
 
-    public Parent getById(int numPar) {
-
+    /**
+     * Obtenir un parent par son identifiant
+     *
+     * @param numPar L'identifiant du parent
+     * @return Parent
+     */
+    public Parent getParentById(int numPar) {
         try {
             pst = connection.prepareStatement("SELECT * FROM " + this.tableName + " WHERE NumPar = ?");
             pst.setInt(1, numPar);
@@ -44,6 +54,31 @@ public class ParentDAO {
         return null;
     }
 
+    /**
+     * Créer un parent
+     *
+     * @param parent Le parent à créer
+     */
+    public void create(Parent parent) {
+        try {
+            pst = connection.prepareStatement("INSERT INTO " + this.tableName + " (ParLastName, ParFirstName, PhoneNum) " +
+                    "VALUES (?, ?, ?)");
+            pst.setString(1, parent.getParLastName());
+            pst.setString(2, parent.getParFirstName());
+            pst.setString(2, parent.getPhoneNumber());
+
+            pst.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Erreur lors de l'ajout " + e.getMessage());
+        }
+    }
+
+    /**
+     * Mettre à jour un parent
+     *
+     * @param parent Le parent à mettre à jour
+     * @return Parent
+     */
     public Parent update(Parent parent) {
 
         try {
@@ -57,10 +92,15 @@ public class ParentDAO {
         } catch (SQLException e) {
             System.err.println("Erreur lors de la mise à jour : " + e.getMessage());
         }
-        return this.getById(parent.getNumPar());
+        return this.getParentById(parent.getNumPar());
     }
 
 
+    /**
+     * Supprimer un parent
+     *
+     * @param parent Le parent à supprimer
+     */
     public void delete(Parent parent) {
 
         try {
@@ -71,27 +111,4 @@ public class ParentDAO {
             System.err.println("Erreur lors de la suppression : " + e.getMessage());
         }
     }
-
-//    public void AfficherParent()
-//    {
-//        try {
-//            st = dbc.getConnection().createStatement();
-//            ResultSet rst = st.executeQuery("SELECT * FROM Parent");
-//
-//            while(rst.next()) {
-//                System.out.println("Parent N°: " + rst.getInt("NumPar") + " Prénom: " +
-//                        rst.getString("ParFirstName") + " Nom:  " +
-//                        rst.getString("parLastName")  + "Telephone: "
-//                        + rst.getString("phoneNumber"));
-//            }
-//
-//        } catch (SQLException e) {
-//            System.err.println("Erreur" + e.getMessage());
-//        }
-//    }
-//
-//    public static void main(String[] args) {
-//        ParentDAO PaDAO = new ParentDAO();
-//        PaDAO.AfficherParent();
-//    }
 }

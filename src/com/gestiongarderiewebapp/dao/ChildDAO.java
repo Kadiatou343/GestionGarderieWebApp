@@ -3,7 +3,6 @@ package com.gestiongarderiewebapp.dao;
 import com.gestiongarderiewebapp.bean.Child;
 import com.gestiongarderiewebapp.bean.Parent;
 import com.gestiongarderiewebapp.util.DbConnectionProvider;
-import com.sun.istack.internal.Nullable;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -20,14 +19,14 @@ public class ChildDAO {
      *
      * @return ArrayList
      */
-    public ArrayList<Child> getAll() {
+    public ArrayList<Child> getAllChildren() {
         ArrayList<Child> children = new ArrayList<>();
 
         try {
             pst = connection.prepareStatement("SELECT * FROM " + this.tableName);
             rs = pst.executeQuery();
             while (rs.next()) {
-                Parent parent = parentDAO.getById(rs.getInt("NumPar"));
+                Parent parent = parentDAO.getParentById(rs.getInt("NumPar"));
                 children.add(new Child(rs.getInt("NumChild"), rs.getString("ChildLastName"),
                         rs.getString("ChildFirstName"), rs.getInt("ChildAge"), parent));
             }
@@ -43,19 +42,40 @@ public class ChildDAO {
      * @param numChild L'identifiant de l'enfant
      * @return Child
      */
-    public Child getById(int numChild) {
+    public Child getChildById(int numChild) {
 
         try {
             pst = connection.prepareStatement("SELECT * FROM " + this.tableName + " WHERE NumChild = ?");
             pst.setInt(1, numChild);
             rs = pst.executeQuery();
-            Parent parent = parentDAO.getById(rs.getInt("NumPar"));
+            Parent parent = parentDAO.getParentById(rs.getInt("NumPar"));
             return new Child(rs.getInt("NumChild"), rs.getString("ChildLastName"),
                     rs.getString("ChildFirstName"), rs.getInt("ChildAge"), parent);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
+    }
+
+    /**
+     * Créer un enfant dans la table
+     *
+     * @param child L'enfant à ajouter
+     */
+    public void createChild(Child child) {
+        try {
+            pst = connection.prepareStatement("INSERT INTO " + this.tableName + " (ChildLastName, ChildFirstName, ChildAge, NumPar, IdGard) " +
+                    "VALUES (?, ?, ?, ?, ?)");
+            pst.setString(1, child.getChildLastName());
+            pst.setString(2, child.getChildFirstName());
+            pst.setInt(3, child.getChildAge());
+            pst.setInt(4, child.getParent().getNumPar());
+            pst.setInt(5, 1);
+
+            pst.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Erreur lors de l'ajout : " + e.getMessage());
+        }
     }
 
     /**
@@ -79,7 +99,7 @@ public class ChildDAO {
             throw new RuntimeException(e);
         }
 
-        return this.getById(child.getNumChild());
+        return this.getChildById(child.getNumChild());
     }
 
     /**
@@ -97,22 +117,5 @@ public class ChildDAO {
             throw new RuntimeException(e);
         }
     }
-
-//    public void AfficherEnfant()
-//    {
-//        try {
-//            st = dbc.getConnection().createStatement();
-//            ResultSet rst = st.executeQuery("SELECT * FROM Child");
-//
-//            while(rst.next()) {
-//                System.out.println("Enfant N°: " + rst.getInt("numChild") + " Prénom: " +
-//                        rst.getString("childFirstName") + " Nom:  " +
-//                        rst.getString("childLastName")  + "Age: "
-//                        + rst.getString("childAge")+ "\n" + rst.getString("parent"));
-//            }
-//
-//        } catch (SQLException e) {
-//            System.err.println("Erreur" + e.getMessage());
-//        }
 
 }

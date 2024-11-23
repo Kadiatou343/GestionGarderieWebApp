@@ -1,0 +1,68 @@
+/* Login */
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Jost', sans-serif;
+    background: linear-gradient(to bottom, #E1DCD9, #A67F78,#8F8681,#32435F);
+}
+
+
+.main {
+    width: 350px;
+    height: 500px;
+    background: url("../images/image1.jpg") no-repeat center / cover;
+    border-radius: 10px;
+    box-shadow: 5px 20px 50px #0000 ;
+}
+
+label{
+    color: #A67F78;
+    font-size: 2.3em;
+    justify-content: center;
+    display: flex;
+    margin: 80px;
+    font-weight: bold;
+}
+
+input {
+    width: 60%;
+    height: 20px;
+    background: #e0dede;
+    justify-content: center;
+    display: flex;
+    margin: 20px auto;
+    padding: 10px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+}
+
+button{
+    width: 60%;
+    height: 40px;
+    margin: 10px auto;
+    justify-content: center;
+    display: block;
+    color: #fff;
+    background: #A67F78;
+    font-size: 1em;
+    font-weight: bold;
+    margin-top: 20px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+}
+
+button:hover {
+    background: #c9867a;
+}
+
+.login label {
+    color: #A67F78;
+}
+

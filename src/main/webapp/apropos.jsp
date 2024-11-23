@@ -34,7 +34,7 @@
                 </div>
                 <div class="description">
                     <p>
-                        ChouChou est une application web qui gere divers taches de la garderie Kiddos.
+                        ChouChou est une application web qui gère divers taches de la garderie Kiddos.
                         Elle automatise l'enregistrement des enfants et de leur parent ainsi que leur inscription.
                     </p>
                 </div>

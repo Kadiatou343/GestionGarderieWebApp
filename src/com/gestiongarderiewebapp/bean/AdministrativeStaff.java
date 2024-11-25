@@ -18,11 +18,12 @@ public class AdministrativeStaff extends Employee {
      *
      * @param empLastName  Le nom de famille du personnel administratif
      * @param empFirstName Le prénom du personnel administratif
+     * @param passwordHash Le hash du mot de passe du personnel administratif
      * @param phoneNumber  Le numéro de téléphone du personnel administratif
      * @param emailProf    L'email professionnel du personnel administratif
      */
-    public AdministrativeStaff(String empLastName, String empFirstName, String phoneNumber, String emailProf) {
-        super(empLastName, empFirstName);
+    public AdministrativeStaff(String empLastName, String empFirstName, String passwordHash, String phoneNumber, String emailProf) {
+        super(empLastName, empFirstName, passwordHash);
         this.phoneNumber = phoneNumber;
         this.emailProf = emailProf;
     }
@@ -32,12 +33,13 @@ public class AdministrativeStaff extends Employee {
      *
      * @param numEmp       L'identifiant du personnel administratif
      * @param empLastName  Le nom de famille du personnel administratif
+     * @param passwordHash Le hash du mot de passe du personnel administratif
      * @param empFirstName Le prénom du personnel administratif
      * @param phoneNumber  Le numéro de téléphone du personnel administratif
      * @param emailProf    L'email professionnel du personnel administratif
      */
-    public AdministrativeStaff(int numEmp, String empLastName, String empFirstName, String phoneNumber, String emailProf) {
-        super(numEmp, empLastName, empFirstName);
+    public AdministrativeStaff(int numEmp, String empLastName, String empFirstName, String passwordHash, String phoneNumber, String emailProf) {
+        super(numEmp, empLastName, empFirstName, passwordHash);
         this.phoneNumber = phoneNumber;
         this.emailProf = emailProf;
     }

@@ -24,7 +24,7 @@ public class EmployeeDAO {
             rs = pst.executeQuery();
             while (rs.next()) {
                 employees.add(new Employee(rs.getInt("NumEmp"), rs.getString("EmpLastName"),
-                        rs.getString("EmpFirstName")));
+                        rs.getString("EmpFirstName"), rs.getString("PasswordHash")));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -45,7 +45,7 @@ public class EmployeeDAO {
             rs = pst.executeQuery();
             if (rs.next()) {
                 return new Employee(rs.getInt("NumEmp"), rs.getString("EmpLastName"),
-                        rs.getString("EmpFirstName"));
+                        rs.getString("EmpFirstName"), rs.getString("PasswordHash"));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

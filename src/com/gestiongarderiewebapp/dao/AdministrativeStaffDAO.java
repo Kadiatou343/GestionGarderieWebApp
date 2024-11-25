@@ -20,7 +20,8 @@ public class AdministrativeStaffDAO extends EmployeeDAO {
             rs = pst.executeQuery();
             while (rs.next()) {
                 staffAdmins.add(new AdministrativeStaff(rs.getInt("NumEmp"), rs.getString("EmpLastName"),
-                        rs.getString("EmpFirstName"), rs.getString("PhoneNum"), rs.getString("EmailProf")));
+                        rs.getString("EmpFirstName"), rs.getString("PasswordHash"),
+                        rs.getString("PhoneNum"), rs.getString("EmailProf")));
             }
         } catch (SQLException e) {
             System.err.println("Erreur lors de la recherche : " + e.getMessage());
@@ -42,7 +43,8 @@ public class AdministrativeStaffDAO extends EmployeeDAO {
             rs = pst.executeQuery();
             if (rs.next()) {
                 return new AdministrativeStaff(rs.getInt("NumEmp"), rs.getString("EmpLastName"),
-                        rs.getString("EmpFirstName"), rs.getString("PhoneNum"), rs.getString("EmailProf"));
+                        rs.getString("EmpFirstName"), rs.getString("PasswordHash"),
+                        rs.getString("PhoneNum"), rs.getString("EmailProf"));
             }
         } catch (SQLException e) {
             System.err.println("Erreur lors de la recherche : " + e.getMessage());
@@ -56,14 +58,15 @@ public class AdministrativeStaffDAO extends EmployeeDAO {
      */
     public void createStaffAdmin(AdministrativeStaff staffAdmin) {
         try {
-            pst = connection.prepareStatement("INSERT INTO " + this.tableName + " (EmpLastName, EmpFirstName, EmpType, PhoneNum, EmailProf, IdGard) " +
-                    "VALUES (?, ?, ?, ?, ?, ?)");
+            pst = connection.prepareStatement("INSERT INTO " + this.tableName + " (EmpLastName, EmpFirstName, PasswordHash, EmpType, PhoneNum, EmailProf, IdGard) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?)");
             pst.setString(1, staffAdmin.getEmpLastName());
             pst.setString(2, staffAdmin.getEmpFirstName());
-            pst.setString(3, "Administratif");
-            pst.setString(4, staffAdmin.getPhoneNumber());
-            pst.setString(5, staffAdmin.getEmailProf());
-            pst.setInt(6, 1);
+            pst.setString(3, staffAdmin.getPasswordHash());
+            pst.setString(4, "Administratif");
+            pst.setString(5, staffAdmin.getPhoneNumber());
+            pst.setString(6, staffAdmin.getEmailProf());
+            pst.setInt(7, 1);
 
             pst.executeUpdate();
         } catch (SQLException e) {
@@ -80,13 +83,14 @@ public class AdministrativeStaffDAO extends EmployeeDAO {
 
         try {
             pst = connection.prepareStatement("UPDATE " + this.tableName + " SET EmpLastName = ?, " +
-                    "EmpFirstName = ?, PhoneNum = ?, EmailProf = ? WHERE EmpType = ? AND NumEmp = ?");
+                    "EmpFirstName = ?, PasswordHash = ?, PhoneNum = ?, EmailProf = ? WHERE EmpType = ? AND NumEmp = ?");
             pst.setString(1, staffAdmin.getEmpLastName());
             pst.setString(2, staffAdmin.getEmpFirstName());
-            pst.setString(3, staffAdmin.getPhoneNumber());
-            pst.setString(4, staffAdmin.getEmailProf());
-            pst.setString(5, "Administratif");
-            pst.setInt(6, staffAdmin.getNumEmp());
+            pst.setString(3, staffAdmin.getPasswordHash());
+            pst.setString(4, staffAdmin.getPhoneNumber());
+            pst.setString(5, staffAdmin.getEmailProf());
+            pst.setString(6, "Administratif");
+            pst.setInt(7, staffAdmin.getNumEmp());
             pst.executeUpdate();
         } catch (SQLException e) {
             System.err.println("Erreur lors de la mise à jour : " + e.getMessage());

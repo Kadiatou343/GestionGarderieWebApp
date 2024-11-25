@@ -24,7 +24,8 @@ public class EducatorDAO extends EmployeeDAO {
             while (rs.next()) {
                 EducatorDegrees degree = EducatorDegrees.fromValue(rs.getString("Degree"));
                 educators.add(new Educator(rs.getInt("NumEmp"), rs.getString("EmpLastName"),
-                        rs.getString("EmpFirstName"), degree, rs.getInt("NbrChildren")));
+                        rs.getString("EmpFirstName"), rs.getString("PasswordHash"),
+                        degree, rs.getInt("NbrChildren")));
             }
         } catch (SQLException | IllegalArgumentException e) {
             System.err.println("Erreur lors de la recherche : " + e.getMessage());
@@ -50,7 +51,8 @@ public class EducatorDAO extends EmployeeDAO {
             if (rs.next()) {
                 EducatorDegrees degree = EducatorDegrees.fromValue(rs.getString("Degree"));
                 return new Educator(rs.getInt("NumEmp"), rs.getString("EmpLastName"),
-                        rs.getString("EmpFirstName"), degree, rs.getInt("NbrChildren"));
+                        rs.getString("EmpFirstName"), rs.getString("PasswordHash"),
+                        degree, rs.getInt("NbrChildren"));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -66,14 +68,15 @@ public class EducatorDAO extends EmployeeDAO {
      */
     public void createEducator(Educator educator) {
         try {
-            pst = connection.prepareStatement("INSERT INTO " + this.tableName + " (EmpLastName, EmpFirstName, EmpType, Degree, NbrChildren, IdGard) " +
-                    "VALUES (?, ?, ?, ?, ?, ?)");
+            pst = connection.prepareStatement("INSERT INTO " + this.tableName + " (EmpLastName, EmpFirstName, PasswordHash, EmpType, Degree, NbrChildren, IdGard) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?)");
             pst.setString(1, educator.getEmpLastName());
             pst.setString(2, educator.getEmpFirstName());
-            pst.setString(3, "Educatrice");
-            pst.setString(4, educator.getDegree().getValue());
-            pst.setInt(5, educator.getNbrChildren());
-            pst.setInt(6, 1);
+            pst.setString(3, educator.getPasswordHash());
+            pst.setString(4, "Educatrice");
+            pst.setString(5, educator.getDegree().getValue());
+            pst.setInt(6, educator.getNbrChildren());
+            pst.setInt(7, 1);
 
             pst.executeUpdate();
         } catch (SQLException e) {
@@ -90,13 +93,14 @@ public class EducatorDAO extends EmployeeDAO {
 
         try {
             pst = connection.prepareStatement("UPDATE " + this.tableName + " SET EmpLastName = ?, " +
-                    "EmpFirstName = ?, Degree = ?, NbrChildren = ? WHERE EmpType = ? AND NumEmp = ?");
+                    "EmpFirstName = ?, PasswordHash = ?, Degree = ?, NbrChildren = ? WHERE EmpType = ? AND NumEmp = ?");
             pst.setString(1, educator.getEmpLastName());
             pst.setString(2, educator.getEmpFirstName());
-            pst.setString(3, educator.getDegree().getValue());
-            pst.setInt(4, educator.getNbrChildren());
-            pst.setString(5, "Educatrice");
-            pst.setInt(6, educator.getNumEmp());
+            pst.setString(3, educator.getPasswordHash());
+            pst.setString(4, educator.getDegree().getValue());
+            pst.setInt(5, educator.getNbrChildren());
+            pst.setString(6, "Educatrice");
+            pst.setInt(7, educator.getNumEmp());
             pst.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);

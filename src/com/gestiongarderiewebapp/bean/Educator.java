@@ -20,11 +20,12 @@ public class Educator extends Employee {
      *
      * @param empLastName  Le nom de famille de l'éducatrice
      * @param empFirstName Le prénom de l'éducatrice
+     * @param passwordHash Le hash du mot de passe de l'éducatrice
      * @param degree       Le diplôme de l'éducatrice
      * @param nbrChildren  Le nombre d'enfants pris en charge par l'éducatrice
      */
-    public Educator(String empLastName, String empFirstName, EducatorDegrees degree, int nbrChildren) {
-        super(empLastName, empFirstName);
+    public Educator(String empLastName, String empFirstName, String passwordHash, EducatorDegrees degree, int nbrChildren) {
+        super(empLastName, empFirstName, passwordHash);
         this.degree = degree;
         this.nbrChildren = nbrChildren;
     }
@@ -35,11 +36,12 @@ public class Educator extends Employee {
      * @param numEmp       L'identifiant de l'éducatrice
      * @param empLastName  Le nom de famille de l'éducatrice
      * @param empFirstName Le prénom de l'éducatrice
+     * @param passwordHash Le hash du mot de passe de l'éducatrice
      * @param degree       Le diplôme de l'éducatrice
      * @param nbrChildren  Le nombre d'enfants pris en charge par l'éducatrice
      */
-    public Educator(int numEmp, String empLastName, String empFirstName, EducatorDegrees degree, int nbrChildren) {
-        super(numEmp, empLastName, empFirstName);
+    public Educator(int numEmp, String empLastName, String empFirstName, String passwordHash, EducatorDegrees degree, int nbrChildren) {
+        super(numEmp, empLastName, empFirstName, passwordHash);
         this.degree = degree;
         this.nbrChildren = nbrChildren;
     }

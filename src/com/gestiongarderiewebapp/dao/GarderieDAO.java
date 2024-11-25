@@ -106,6 +106,7 @@ public class GarderieDAO {
             pst.setInt(2, garderie.getCapGard());
 
             pst.executeUpdate();
+            System.out.println("Garderie ajoutée avec succès !");
         } catch (SQLException e) {
             System.err.println("Erreur lors de l'ajout : " + e.getMessage());
         }

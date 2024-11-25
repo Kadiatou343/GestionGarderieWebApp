@@ -65,7 +65,7 @@ public class ParentDAO {
                     "VALUES (?, ?, ?)");
             pst.setString(1, parent.getParLastName());
             pst.setString(2, parent.getParFirstName());
-            pst.setString(2, parent.getPhoneNumber());
+            pst.setString(3, parent.getPhoneNumber());
 
             pst.executeUpdate();
         } catch (SQLException e) {

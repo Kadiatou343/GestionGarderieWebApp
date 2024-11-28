@@ -45,8 +45,10 @@ public class ParentDAO {
             pst.setInt(1, numPar);
             rs = pst.executeQuery();
 
-            return new Parent(rs.getInt("NumPar"), rs.getString("ParLastName"),
-                    rs.getString("ParFirstName"), rs.getString("PhoneNum"));
+            if (rs.next()){
+                return new Parent(rs.getInt("NumPar"), rs.getString("ParLastName"),
+                        rs.getString("ParFirstName"), rs.getString("PhoneNum"));
+            }
 
         } catch (SQLException e) {
             System.err.println("Erreur lors de la recherche: " + e.getMessage());
@@ -61,11 +63,12 @@ public class ParentDAO {
      */
     public void create(Parent parent) {
         try {
-            pst = connection.prepareStatement("INSERT INTO " + this.tableName + " (ParLastName, ParFirstName, PhoneNum) " +
-                    "VALUES (?, ?, ?)");
-            pst.setString(1, parent.getParLastName());
-            pst.setString(2, parent.getParFirstName());
-            pst.setString(3, parent.getPhoneNumber());
+            pst = connection.prepareStatement("INSERT INTO " + this.tableName + " (NumPar, ParLastName, ParFirstName, PhoneNum) " +
+                    "VALUES (?, ?, ?, ?)");
+            pst.setInt(1, parent.getNumPar());
+            pst.setString(2, parent.getParLastName());
+            pst.setString(3, parent.getParFirstName());
+            pst.setString(4, parent.getPhoneNumber());
 
             pst.executeUpdate();
         } catch (SQLException e) {

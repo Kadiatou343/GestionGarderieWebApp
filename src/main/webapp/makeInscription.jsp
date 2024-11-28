@@ -14,36 +14,34 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Parkinsans&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./static/css/styles.css">
-    <title>About box</title>
+    <title>Inscription - Panel</title>
     <style>
         body {background: #f1f1f1;}
     </style>
 </head>
 <body>
-    <div class="about-box-container">
-        <div class="about-box">
-            <div class="about-box-title">
-                <h3>A propos</h3>
+    <div class="entity-container">
+        <div class="add-content">
+            <div class="title">
+                <h2>Faire une inscription</h2>
             </div>
-            <div class="about-box-content">
-                <div class="logo">
-                    <img src="./static/images/logo.jpg" alt="Image du logo">
+            <form action="#" method="" id="register-form">
+                <fieldset>
+                    <legend>Inscription</legend>
+                    <div class="form-group">
+                        <label for="numEnf">Num de l'enfant à inscrire&nbsp;:</label>
+                        <input type="number" name="numEnf" id="numEnf" step="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="numEmp">Num de l'employé responsable&nbsp;:</label>
+                        <input type="number" name="numEmp" id="numEmp" step="1">
+                    </div>
+                </fieldset>
+                <div class="form-button">
+                    <button type="submit" class="btn">Inscrire</button>
+                    <button type="reset" class="btn">Réinitiliser le formulaire</button>
                 </div>
-                <div class="version-slogan">
-                    <span>ChouChou</span> <br>
-                    <span>Tout pour les tout-petits</span> <br>
-                    <span>Version 1.0</span> <br>
-                    <i class="bi bi-c-circle"></i>&nbsp;
-                    <span>Tous droits réservés</span> <br>
-                    <span>Made by Donita Lopez Guetuissie Mambou et Kadiatou Doumbia</span>
-                </div>
-                <div class="description">
-                    <p>
-                        ChouChou est une application web qui gère divers taches de la garderie Kiddos.
-                        Elle automatise l'enregistrement des enfants et de leur parent ainsi que leur inscription.
-                    </p>
-                </div>
-            </div>
+            </form>
         </div>
     </div>
 </body>

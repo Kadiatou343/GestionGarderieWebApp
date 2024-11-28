@@ -6,7 +6,7 @@
 <html>
 
     <head>
-        <tittle></tittle>
+        <tittle>Login</tittle>
         <link rel="StyleSheet" type="text/css" href="./static/css/loginStyle.css">
         <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="Style">
     </head>

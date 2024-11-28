@@ -25,9 +25,10 @@ public class DbConnectionProvider {
 
     public DbConnectionProvider(){
         try {
+            Class.forName("oracle.jdbc.OracleDriver");
            this.connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 //            System.out.println("Connexion succes");
-        } catch (SQLException e) {
+        } catch (SQLException|ClassNotFoundException e) {
             System.err.println("Echec de connexion : " +e.getMessage());
         }
     }

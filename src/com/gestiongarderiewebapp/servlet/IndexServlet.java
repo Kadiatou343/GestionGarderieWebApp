@@ -11,19 +11,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.security.NoSuchAlgorithmException;
 
 @WebServlet({"/index", "/home", "/login"})
 public class IndexServlet extends HttpServlet {
     ChildDAO childDAO = new ChildDAO();
-    int count = childDAO.getChildrenCount();
     EmployeeDAO empDAO = new EmployeeDAO();
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String url = req.getServletPath();
         switch (url) {
             case "/home":
+                Integer count = childDAO.getChildrenCount();
+                Integer empCount = empDAO.getEmployeesCount();
+                req.setAttribute("count", count);
+                req.setAttribute("empCount", empCount);
                 this.getServletContext().getRequestDispatcher("/home.jsp").forward(req, resp);
                 break;
             case "/index":
@@ -38,9 +43,8 @@ public class IndexServlet extends HttpServlet {
             Employee emp = empDAO.getById(Integer.parseInt(req.getParameter("numEmp")));
             try {
                 if (PasswordHasher.validatePassword(req.getParameter("password"), emp.getPasswordHash())) {
-                    req.setAttribute("employee", emp);
-                    req.setAttribute("count", count);
-                    this.getServletContext().getRequestDispatcher("/home.jsp").forward(req, resp);
+//                    req.setAttribute("employee", emp);
+                    resp.sendRedirect("home?emp=" + URLEncoder.encode(emp.getEmpFirstName() + " " + emp.getEmpLastName(), "UTF-8"));
                 } else {
                     req.setAttribute("message", "Le mot de passe est incorrect");
                     this.getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);

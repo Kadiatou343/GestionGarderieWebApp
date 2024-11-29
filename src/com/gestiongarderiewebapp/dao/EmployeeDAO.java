@@ -52,4 +52,18 @@ public class EmployeeDAO {
         }
         return null;
     }
+
+    public Integer getEmployeesCount() {
+        int count = 0;
+        try {
+            pst = connection.prepareStatement("SELECT count(*) AS total FROM " + this.tableName);
+            rs = pst.executeQuery();
+            if (rs.next()){
+                count = rs.getInt("total");
+            }
+        } catch (SQLException e) {
+            System.err.println("Erreur lors du compte : " + e.getMessage());
+        }
+        return count;
+    }
 }

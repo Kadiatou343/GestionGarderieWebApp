@@ -119,7 +119,7 @@ public class ChildDAO {
         }
     }
 
-    public int getChildrenCount(){
+    public Integer getChildrenCount(){
         int count = 0;
         try {
             pst = connection.prepareStatement("SELECT count(*) AS total FROM " + this.tableName);

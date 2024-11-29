@@ -7,7 +7,7 @@ public class Parent {
     /**
      * L'identifiant du parent
      */
-    private int NumPar;
+    private int numPar;
     /**
      * Le nom de famille du parent
      */
@@ -41,7 +41,7 @@ public class Parent {
      * @param phoneNumber Le numéro de téléphone du parent
      */
     public Parent(int numPar, String parLastName, String parFirstName, String phoneNumber) {
-        NumPar = numPar;
+        this.numPar = numPar;
         this.parLastName = parLastName;
         this.parFirstName = parFirstName;
         this.phoneNumber = phoneNumber;
@@ -50,11 +50,11 @@ public class Parent {
     //region Getters et Setters
 
     public int getNumPar() {
-        return NumPar;
+        return numPar;
     }
 
     public void setNumPar(int numPar) {
-        NumPar = numPar;
+        this.numPar = numPar;
     }
 
     public String getParLastName() {
@@ -88,7 +88,7 @@ public class Parent {
      */
     @Override
     public String toString() {
-        return "Parent N°" + this.NumPar +
+        return "Parent N°" + this.numPar +
                 "\tPrénom : " + this.parFirstName +
                 "\tNom : " + this.parLastName +
                 "\tTelephone : " + this.phoneNumber;

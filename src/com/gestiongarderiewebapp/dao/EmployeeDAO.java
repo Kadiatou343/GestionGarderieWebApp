@@ -48,7 +48,7 @@ public class EmployeeDAO {
                         rs.getString("EmpFirstName"), rs.getString("PasswordHash"));
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.err.println("Erreur lors de la recherche : " + e.getMessage());
         }
         return null;
     }

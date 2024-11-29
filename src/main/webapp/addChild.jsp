@@ -23,26 +23,27 @@
     <div class="entity-container">
         <div class="add-content">
             <div class="title">
-                <h2>Ajouter un enfant et son parent</h2>
+                <h2><c:out value="${child == null ? 'Ajouter un enfant et son parent' : 'Modifier un enfant et son parent'}" /></h2>
             </div>
-            <form action="addChild" method="post" id="kid-content">
+            <form action="${child == null ? 'addChild' : 'updateChild'}" method="post" id="kid-content">
+                <input type="hidden" name="numChild" value="${child != null ? child.numChild : ''}">
+                <input type="hidden" name="numParHidden" value="${child != null ? child.parent.numPar : ''}">
                 <fieldset>
                     <legend>Informations de l'enfant</legend>
-                    <!-- Le num de l'enfant pourra etre genere par la base de donnnees donc pas de input Num-->
 
                     <div class="form-group">
                         <label for="last_name">Nom :</label>
-                        <input type="text" name="lastNameE" id="lastNameE">
+                        <input type="text" name="lastNameE" id="lastNameE" value="${child != null ? child.childLastName : ''}">
                     </div>
 
                     <div class="form-group">
                         <label for="firstName">Prénom :</label>
-                        <input type="text" name="firstNameE" id="firstNameE">
+                        <input type="text" name="firstNameE" id="firstNameE" value="${child != null ? child.childFirstName : ''}">
                     </div>
 
                     <div class="form-group">
                         <label for="age">Age :</label>
-                        <input type="number" name="age" id="age" step="1" max="7">
+                        <input type="number" name="age" id="age" step="1" max="7" value="${child != null ? child.childAge : ''}">
                     </div>
                 </fieldset>
                 <fieldset>
@@ -50,27 +51,26 @@
 
                     <div class="form-group">
                         <label for="numPar">Id :</label>
-                        <input type="number" name="numPar" id="numPar" step="1">
+                        <input type="number" name="numPar" id="numPar" step="1" <input type="hidden" name="numChild" >
                     </div>
 
                     <div class="form-group" id="nom">
                         <label for="lastNameP">Nom :</label>
-                        <input type="text" name="lastNameP" id="lastNameP">
+                        <input type="text" name="lastNameP" id="lastNameP" <input type="hidden" name="numChild" value="${child != null ? child.parent.parLastName : ''}">
                     </div>
 
                     <div class="form-group" id="pren">
                         <label for="firstNameP">Prénom :</label>
-                        <input type="text" name="firstNameP" id="firstNameP">
+                        <input type="text" name="firstNameP" id="firstNameP" <input type="hidden" name="numChild" value="${child != null ? child.parent.parFirstName : ''}">
                     </div>
 
                     <div class="form-group" id="tel">
                         <label for="contact">Telephone :</label>
-                        <input type="text" name="contact" id="contact">
+                        <input type="text" name="contact" id="contact" <input type="hidden" name="numChild" value="${child != null ? child.parent.phoneNumber : ''}">
                     </div>
                 </fieldset>
                 <div class="form-button">
-                    <button type="submit" class="btn">Ajouter</button>
-                    <button type="reset" class="btn">Reinitiliser le formulaire</button>
+                    <button type="submit" class="btn">${child == null ? 'Ajouter' : 'Modifier'}</button>
                 </div>
             </form>
         </div>

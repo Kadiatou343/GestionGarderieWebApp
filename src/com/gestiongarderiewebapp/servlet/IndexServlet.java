@@ -1,5 +1,7 @@
 package com.gestiongarderiewebapp.servlet;
 
+import com.gestiongarderiewebapp.dao.ChildDAO;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,9 +11,12 @@ import java.io.IOException;
 
 @WebServlet("/index")
 public class IndexServlet extends HttpServlet {
+    ChildDAO childDAO = new ChildDAO();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int count = childDAO.getChildrenCount();
+        req.setAttribute("count", count);
         this.getServletContext().getRequestDispatcher("/index.jsp").forward(req,resp);
     }
 }

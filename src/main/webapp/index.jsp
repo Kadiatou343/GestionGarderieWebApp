@@ -23,7 +23,7 @@
         </div>
         <ul>
             <li><a href="index.jsp"><img src="./static/icons/dashboard (3).png" alt="">&nbsp; <span>Dashboard</span> </a></li>
-            <li><a href="child.jsp" target="contentFrame"><img src="./static/icons/baby-30.png" alt="">&nbsp;<span>Enfants</span> </a></li>
+            <li><a href="children" target="contentFrame"><img src="./static/icons/baby-30.png" alt="">&nbsp;<span>Enfants</span> </a></li>
             <li><a href="parent.jsp" target="contentFrame"><img src="./static/icons/parent.png" alt="">&nbsp;<span>Parents</span> </a></li>
             <li><a href="inscription.jsp" target="contentFrame"><img src="./static/icons/inscription.png" alt="">&nbsp;<span>Inscription</span> </a></li>
             <li><a href="employee.jsp" target="contentFrame"><img src="./static/icons/employe.png" alt="">&nbsp;<span>Employés</span> </a></li>
@@ -50,7 +50,7 @@
             <div class="cards">
                 <div class="card">
                     <div class="box">
-                        <h1>25</h1>
+                        <h1>20</h1>
                         <h3>Enfants</h3>
                     </div>
                     <div class="icon-case">

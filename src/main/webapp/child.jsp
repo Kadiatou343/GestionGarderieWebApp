@@ -62,8 +62,8 @@
                         <td>Section</td>
                         <td>${child.parent.parLastName} &nbsp; ${child.parent.parFirstName}</td>
                         <td>
-                            <a href="#" class="bt"><i class="bi bi-trash"></i></a>&nbsp;
-                            <a href="#" class="bt"><i class="bi bi-pencil"></i></a>
+                            <a href="editChild?numChild=${child.numChild}" class="bt"><i class="bi bi-pencil"></i></a>&nbsp;
+                            <a href="deleteChild?numChild=${child.numChild}" class="bt"><i class="bi bi-trash"></i></a>
                         </td>
                     </tr>
                     </c:forEach>

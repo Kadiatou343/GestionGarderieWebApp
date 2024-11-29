@@ -3,8 +3,10 @@ package com.gestiongarderiewebapp.dao;
 import com.gestiongarderiewebapp.bean.Educator;
 import com.gestiongarderiewebapp.bean.Employee;
 import com.gestiongarderiewebapp.util.EducatorDegrees;
+import com.gestiongarderiewebapp.util.PasswordHasher;
 
 
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -18,7 +20,7 @@ public class EducatorDAO extends EmployeeDAO {
     public ArrayList<Employee> getAll() {
         ArrayList<Employee> educators = new ArrayList<>();
         try {
-            pst = connection.prepareStatement("SELECT * FROM " + this.tableName + "WHERE EmpType = ?");
+            pst = connection.prepareStatement("SELECT * FROM " + this.tableName + " WHERE EmpType = ?");
             pst.setString(1, "Educatrice");
             rs = pst.executeQuery();
             while (rs.next()) {
@@ -55,7 +57,7 @@ public class EducatorDAO extends EmployeeDAO {
                         degree, rs.getInt("NbrChildren"));
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.err.println("Erreur lors de la recherche " + e.getMessage());
         }
 
         return null;
@@ -89,7 +91,7 @@ public class EducatorDAO extends EmployeeDAO {
      *
      * @param educator L'éducatrice à mettre à jour
      */
-    public Educator update(Educator educator) {
+    public void update(Educator educator) {
 
         try {
             pst = connection.prepareStatement("UPDATE " + this.tableName + " SET EmpLastName = ?, " +
@@ -103,10 +105,8 @@ public class EducatorDAO extends EmployeeDAO {
             pst.setInt(7, educator.getNumEmp());
             pst.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.err.println("Erreur lors de la mise a jour " + e.getMessage());
         }
-
-        return this.getById(educator.getNumEmp());
     }
 
     /**
@@ -116,12 +116,18 @@ public class EducatorDAO extends EmployeeDAO {
      */
     public void delete(Educator educator) {
         try {
-            pst = connection.prepareStatement("DELETE FROM " + this.tableName + " WHERE EmpType = ? AND NumEmp = ?");
-            pst.setString(1, "Educatrice");
-            pst.setInt(2, educator.getNumEmp());
+            pst = connection.prepareStatement("DELETE FROM " + this.tableName + " WHERE NumEmp = ?");
+            pst.setInt(1, educator.getNumEmp());
             pst.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.err.println("Erreur lors de la suppression " + e.getMessage());
         }
     }
+
+//    public static void main(String[] args) {
+//        EducatorDAO dao = new EducatorDAO();
+//        String mdp = "je suis contente";
+//        ArrayList<Employee> edu = dao.getAll();
+//        System.out.println(edu.get(0).getEmpLastName());
+//    }
 }

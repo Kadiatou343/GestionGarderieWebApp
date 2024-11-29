@@ -3,10 +3,12 @@ package com.gestiongarderiewebapp.dao;
 import com.gestiongarderiewebapp.bean.Child;
 import com.gestiongarderiewebapp.bean.Employee;
 import com.gestiongarderiewebapp.bean.Inscription;
+import com.gestiongarderiewebapp.bean.Parent;
 import com.gestiongarderiewebapp.util.DbConnectionProvider;
 
 import java.sql.*;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class InscriptionDAO {
@@ -40,26 +42,27 @@ public class InscriptionDAO {
     }
 
     /**
-     * Obtenir toutes les inscriptions faites par un employé specifique
-     *
-     * @param employee L'employé specifié
-     * @return ArrayList
+     * Obtenir une inscription par ses id
+     * @param numEmp L'identifiant de l'employé qui a fait l'inscription
+     * @param numChild L'identifiant de l'enfant inscrit
+     * @return Inscription
      */
-    public ArrayList<Inscription> getInscriptionsByEmployee(Employee employee) {
-        ArrayList<Inscription> inscriptions = new ArrayList<>();
+    public Inscription getInscriptionByIds(int numEmp, int numChild) {
         try {
-            pst = connection.prepareStatement("SELECT * FROM " + this.tableName + " WHERE NumEmp = ?");
-            pst.setInt(1, employee.getNumEmp());
+            pst = connection.prepareStatement("SELECT * FROM " + this.tableName + " WHERE NumEmp = ? AND NumChild = ?");
+            pst.setInt(1, numEmp);
+            pst.setInt(2,numChild);
             rs = pst.executeQuery();
-            while (rs.next()) {
+            if (rs.next()) {
                 Child registeredChild = childDAO.getChildById(rs.getInt("NumChild"));
-                inscriptions.add(new Inscription(registeredChild, employee,
-                        rs.getDate("InscriptionDate").toLocalDate()));
+                Employee employee = employeeDAO.getById(rs.getInt("NumEmp"));
+                return new Inscription(registeredChild, employee,
+                        rs.getDate("InscriptionDate").toLocalDate());
             }
         } catch (SQLException e) {
             System.err.println("Erreur lors de la recherche : " + e.getMessage());
         }
-        return inscriptions;
+        return null;
     }
 
     /**
@@ -73,7 +76,7 @@ public class InscriptionDAO {
                     "VALUES (?, ?, ?)");
             pst.setInt(1, inscription.getEmployee().getNumEmp());
             pst.setInt(2, inscription.getChild().getNumChild());
-            Date inscriptionDate = (Date) Date.from(inscription.getInscriptionDate().atStartOfDay(ZoneId.systemDefault()).toInstant());
+            Date inscriptionDate = Date.valueOf(inscription.getInscriptionDate());
             pst.setDate(3, inscriptionDate);
 
             pst.executeUpdate();
@@ -82,4 +85,16 @@ public class InscriptionDAO {
         }
     }
 
+    public void deleteInscription(Inscription inscription){
+        try {
+            pst = connection.prepareStatement("DELETE FROM " + this.tableName + " " +
+                    "WHERE NumEmp = ? AND NumChild = ? ");
+            pst.setInt(1,inscription.getEmployee().getNumEmp());
+            pst.setInt(2,inscription.getChild().getNumChild());
+
+            pst.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Erreur lors de la suppression : " + e.getMessage());
+        }
+    }
 }

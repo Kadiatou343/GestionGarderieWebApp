@@ -33,13 +33,16 @@
                         <input type="number" name="numEnf" id="numEnf" step="1">
                     </div>
                     <div class="form-group">
-                        <label for="numEmp">Num de l'employé responsable&nbsp;:</label>
+                        <label for="numEmp">Num de l'employé qui inscrit&nbsp;:</label>
                         <input type="number" name="numEmp" id="numEmp" step="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="numEmpRes">Num de l'éducatrice responsable&nbsp;:</label>
+                        <input type="number" name="numEmpRes" id="numEmpRes" step="1">
                     </div>
                 </fieldset>
                 <div class="form-button">
                     <button type="submit" class="btn">Inscrire</button>
-                    <button type="reset" class="btn">Réinitiliser le formulaire</button>
                 </div>
             </form>
         </div>

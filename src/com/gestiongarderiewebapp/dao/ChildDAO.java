@@ -48,13 +48,16 @@ public class ChildDAO {
             pst = connection.prepareStatement("SELECT * FROM " + this.tableName + " WHERE NumChild = ?");
             pst.setInt(1, numChild);
             rs = pst.executeQuery();
-            Parent parent = parentDAO.getParentById(rs.getInt("NumPar"));
-            return new Child(rs.getInt("NumChild"), rs.getString("ChildLastName"),
-                    rs.getString("ChildFirstName"), rs.getInt("ChildAge"), parent);
+
+            if(rs.next()){
+                Parent parent = parentDAO.getParentById(rs.getInt("NumPar"));
+                return new Child(rs.getInt("NumChild"), rs.getString("ChildLastName"),
+                        rs.getString("ChildFirstName"), rs.getInt("ChildAge"), parent);
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
+        return null;
     }
 
     /**
@@ -82,9 +85,8 @@ public class ChildDAO {
      * Mettre à jour un enfant
      *
      * @param child l'enfant à mettre à jour
-     * @return Child
      */
-    public Child update(Child child) {
+    public void update(Child child) {
 
         try {
             pst = connection.prepareStatement("UPDATE " + this.tableName + " SET " +
@@ -94,12 +96,11 @@ public class ChildDAO {
             pst.setString(2, child.getChildFirstName());
             pst.setInt(3, child.getChildAge());
             pst.setInt(4, child.getParent().getNumPar());
+            pst.setInt(5, child.getNumChild());
             pst.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.err.println("Erreur lors de la mise a jour : " + e.getMessage());
         }
-
-        return this.getChildById(child.getNumChild());
     }
 
     /**
@@ -114,8 +115,22 @@ public class ChildDAO {
             pst.setInt(1, child.getNumChild());
             pst.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.err.println("Erreur lors de la suppression : " + e.getMessage());
         }
+    }
+
+    public int getChildrenCount(){
+        int count = 0;
+        try {
+            pst = connection.prepareStatement("SELECT count(*) AS total FROM " + this.tableName);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                count = rs.getInt("total");
+            }
+        } catch (SQLException e) {
+            System.err.println("Erreur lors du compte : " + e.getMessage());
+        }
+        return count;
     }
 
 }

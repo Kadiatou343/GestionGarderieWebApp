@@ -22,7 +22,7 @@ public class ChildServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String url = req.getServletPath();
-
+        Child child;
         switch (url){
             case "/children":
                 children = childDAO.getAllChildren();
@@ -30,6 +30,14 @@ public class ChildServlet extends HttpServlet {
                 this.getServletContext().getRequestDispatcher("/child.jsp").forward(req, resp);
                 break;
             case "/editChild":
+                child = childDAO.getChildById(Integer.parseInt(req.getParameter("numChild")));
+                req.setAttribute("child", child);
+                this.getServletContext().getRequestDispatcher("/addChild.jsp").forward(req,resp);
+                break;
+            case "/deleteChild":
+                child = childDAO.getChildById(Integer.parseInt(req.getParameter("numChild")));
+                childDAO.delete(child);
+                resp.sendRedirect("children");
                 break;
             default:
         }
@@ -50,10 +58,20 @@ public class ChildServlet extends HttpServlet {
 
                 childDAO.createChild(child);
 
-                resp.sendRedirect("children");
+                this.getServletContext().getRequestDispatcher("addChild.jsp").forward(req, resp);
+
                 break;
             case "/updateChild":
-                break;
+                par = new Parent(Integer.parseInt(req.getParameter("numParHidden")),
+                        req.getParameter("lastNameP"), req.getParameter("firstNameP"),
+                        req.getParameter("contact"));
+                parentDAO.update(par);
+                child = new Child(Integer.parseInt(req.getParameter("numChild")),
+                        req.getParameter("lastNameE"), req.getParameter("firstNameE"),
+                        Integer.parseInt(req.getParameter("age")), par);
+                childDAO.update(child);
+
+                resp.sendRedirect("children");
             default:
         }
     }

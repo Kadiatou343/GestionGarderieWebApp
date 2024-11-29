@@ -80,22 +80,20 @@ public class ParentDAO {
      * Mettre à jour un parent
      *
      * @param parent Le parent à mettre à jour
-     * @return Parent
      */
-    public Parent update(Parent parent) {
+    public void update(Parent parent) {
 
         try {
             pst = connection.prepareStatement("UPDATE " + this.tableName + " SET ParLastName = ?, " +
                     "ParFirstName = ?, PhoneNum = ? WHERE NumPar = ?");
-            pst.setInt(1, parent.getNumPar());
-            pst.setString(2, parent.getParLastName());
-            pst.setString(3, parent.getParFirstName());
-            pst.setString(4, parent.getPhoneNumber());
+            pst.setString(1, parent.getParLastName());
+            pst.setString(2, parent.getParFirstName());
+            pst.setString(3, parent.getPhoneNumber());
+            pst.setInt(4, parent.getNumPar());
             pst.executeUpdate();
         } catch (SQLException e) {
             System.err.println("Erreur lors de la mise à jour : " + e.getMessage());
         }
-        return this.getParentById(parent.getNumPar());
     }
 
 

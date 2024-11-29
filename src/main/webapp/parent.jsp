@@ -25,7 +25,7 @@
         <div class="table-content">
             <div class="table-title">
                 <h2>Liste - Parents</h2>
-                <a href="#" class="btn">NaB</a>
+                <a href="" class="btn">NaB</a>
             </div>
             <table class="table table-striped">
                 <thead>

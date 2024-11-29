@@ -1,0 +1,23 @@
+* {
+    font-family: "Poppins", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+td, th {
+    text-align: justify;
+}
+
+.bt {
+    background: #32435F;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+}
+
+.bt:hover {
+    color: #32435F;
+    background: white;
+    padding: 3px 8px;
+    border: 2px solid ;
+}

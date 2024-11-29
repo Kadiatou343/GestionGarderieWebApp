@@ -25,12 +25,12 @@
             <div class="title">
                 <h2>Faire une inscription</h2>
             </div>
-            <form action="#" method="" id="register-form">
+            <form action="makeInscri" method="post" id="register-form">
                 <fieldset>
                     <legend>Inscription</legend>
                     <div class="form-group">
-                        <label for="numEnf">Num de l'enfant à inscrire&nbsp;:</label>
-                        <input type="number" name="numEnf" id="numEnf" step="1">
+                        <label for="numChild">Num de l'enfant à inscrire&nbsp;:</label>
+                        <input type="number" name="numChild" id="numChild" step="1">
                     </div>
                     <div class="form-group">
                         <label for="numEmp">Num de l'employé qui inscrit&nbsp;:</label>

@@ -17,6 +17,19 @@
     <title>Inscription - Panel</title>
     <style>
         body {background: #f1f1f1;}
+        .bt {
+            background: #32435F;
+            color: white;
+            padding: 5px 10px;
+            text-align: center;
+        }
+
+        .bt:hover {
+            color: #32435F;
+            background: white;
+            padding: 3px 8px;
+            border: 2px solid ;
+        }
     </style>
 </head>
 <body>
@@ -24,54 +37,28 @@
         <div class="table-content">
             <div class="table-title">
                 <h2>Inscriptions</h2>
-                <a href="./makeInscription.jsp" class="btn">Nouveau</a>
+                <a href="./makeInscription.jsp" class="btn"><i class="bi bi-plus-circle-fill"></i></a>
             </div>
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th scope="col">Num Enfant</th>
-                        <th scope="col">Num Employe</th>
-                        <th scope="col">Date Insc.</th>
+                        <th scope="col">Enfant inscrit</th>
+                        <th scope="col">Employé responsable</th>
+                        <th scope="col">Date Inscription</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
+                    <c:forEach var = "insc" items = "${inscriptions}" >
                     <tr>
-                        <th scope="row">1</th>
-                        <th scope="row">1</th>
-                        <td>2024-01-01</td>
+                        <td>${insc.child.childLastName} &nbsp; ${insc.child.childFirstName}</td>
+                        <td>${insc.employee.empLastName} &nbsp; ${insc.employee.empFirstName}</td>
+                        <td>${insc.inscriptionDate}</td>
                         <td>
-                            <a href="#"><i class="bi bi-trash"></i></a>&nbsp;
-                            <a href="#"><i class="bi bi-pencil"></i></a>
+                            <a href="deleteInscri?numEmp=${insc.employee.numEmp}&numChild=${insc.child.numChild}" class="bt"><i class="bi bi-trash"></i></a>
                         </td>
                     </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <th scope="row">1</th>
-                        <td>2024-01-01</td>
-                        <td>
-                            <a href="#"><i class="bi bi-trash"></i></a>&nbsp;
-                            <a href="#"><i class="bi bi-pencil"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <th scope="row">1</th>
-                        <td>2024-01-01</td>
-                        <td>
-                            <a href="#"><i class="bi bi-trash"></i></a>&nbsp;
-                            <a href="#"><i class="bi bi-pencil"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <th scope="row">1</th>
-                        <td>2024-01-01</td>
-                        <td>
-                            <a href="#"><i class="bi bi-trash"></i></a>&nbsp;
-                            <a href="#"><i class="bi bi-pencil"></i></a>
-                        </td>
-                    </tr>
+                    </c:forEach>
                 </tbody>
             </table>
         </div>

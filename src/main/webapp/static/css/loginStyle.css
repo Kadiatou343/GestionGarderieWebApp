@@ -59,7 +59,8 @@ button{
 }
 
 button:hover {
-    background: #c9867a;
+    color: #c9867a;
+    background: white;
 }
 
 .login label {

@@ -19,6 +19,15 @@ public class InscriptionDAO {
     private ChildDAO childDAO = new ChildDAO();
     private EmployeeDAO employeeDAO = new EmployeeDAO();
 
+    //Getters
+    public ChildDAO getChildDAO() {
+        return childDAO;
+    }
+
+    public EmployeeDAO getEmployeeDAO() {
+        return employeeDAO;
+    }
+
     /**
      * Obtenir tous les tuples de la taple
      *

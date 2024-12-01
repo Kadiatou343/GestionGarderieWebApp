@@ -38,46 +38,17 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <c:forEach var="parent" items="${parents}">
                     <tr>
-                        <th scope="row">1</th>
-                        <td>Jones</td>
-                        <td>Gaby</td>
-                        <td>514-000-0000</td>
+                        <th scope="row">${parent.numPar}</th>
+                        <td>${parent.parLastName}</td>
+                        <td>${parent.parFirstName}</td>
+                        <td>${parent.phoneNumber}</td>
                         <td>
-                            <a href="#"><i class="bi bi-trash"></i></a>&nbsp;
-                            <a href="#"><i class="bi bi-pencil"></i></a>
+                            <a href="deleteParent?numPar=${parent.numPar}" class="bt" ><i class="bi bi-trash"></i></a>
                         </td>
                     </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Jones</td>
-                        <td>Gaby</td>
-                        <td>514-000-0000</td>
-                        <td>
-                            <a href="#"><i class="bi bi-trash"></i></a>&nbsp;
-                            <a href="#"><i class="bi bi-pencil"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Jones</td>
-                        <td>Gaby</td>
-                        <td>514-000-0000</td>
-                        <td>
-                            <a href="#"><i class="bi bi-trash"></i></a>&nbsp;
-                            <a href="#"><i class="bi bi-pencil"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Jones</td>
-                        <td>Gaby</td>
-                        <td>514-000-0000</td>
-                        <td>
-                            <a href="#"><i class="bi bi-trash"></i></a>&nbsp;
-                            <a href="#"><i class="bi bi-pencil"></i></a>
-                        </td>
-                    </tr>
+                    </c:forEach>
                 </tbody>
             </table>
         </div>

@@ -25,7 +25,6 @@
         <div class="table-content">
             <div class="table-title">
                 <h2>Liste - Employés</h2>
-                <a href="#" class="btn">NaB</a>
             </div>
             <table class="table table-striped">
                 <thead>
@@ -33,71 +32,16 @@
                         <th scope="col">Num</th>
                         <th scope="col">Nom</th>
                         <th scope="col">Prenom</th>
-                        <th scope="col">TypeEmpl</th>
-                        <th scope="col">EmailPro</th>
-                        <th scope="col">NumTel</th>
-                        <th scope="col">Diplome</th>
-                        <th scope="col">NbrEnfants</th>
-                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
+                    <c:forEach var="emp" items="${employees}">
                     <tr>
-                        <th scope="row">1</th>
-                        <td>Jones</td>
-                        <td>Gaby</td>
-                        <td>Adminitratif</td>
-                        <td>email@domain.com</td>
-                        <td>438-000-0000</td>
-                        <td>RAS</td>
-                        <td>RAS</td>
-                        <td>
-                            <a href="#"><i class="bi bi-trash"></i></a>&nbsp;
-                            <a href="#"><i class="bi bi-pencil"></i></a>
-                        </td>
+                        <th scope="row">${emp.numEmp}</th>
+                        <td>${emp.empLastName}</td>
+                        <td>${emp.empFirstName}</td>
                     </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Jones</td>
-                        <td>Gaby</td>
-                        <td>Adminitratif</td>
-                        <td>email@domain.com</td>
-                        <td>438-000-0000</td>
-                        <td>RAS</td>
-                        <td>RAS</td>
-                        <td>
-                            <a href="#"><i class="bi bi-trash"></i></a>&nbsp;
-                            <a href="#"><i class="bi bi-pencil"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Jones</td>
-                        <td>Gaby</td>
-                        <td>Educatrice</td>
-                        <td>RAS</td>
-                        <td>RAS</td>
-                        <td>DEC</td>
-                        <td>8</td>
-                        <td>
-                            <a href="#"><i class="bi bi-trash"></i></a>&nbsp;
-                            <a href="#"><i class="bi bi-pencil"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Jones</td>
-                        <td>Gaby</td>
-                        <td>Educatrice</td>
-                        <td>RAS</td>
-                        <td>RAS</td>
-                        <td>RGES</td>
-                        <td>8</td>
-                        <td>
-                            <a href="#"><i class="bi bi-trash"></i></a>&nbsp;
-                            <a href="#"><i class="bi bi-pencil"></i></a>
-                        </td>
-                    </tr>
+                    </c:forEach>
                 </tbody>
             </table>
         </div>

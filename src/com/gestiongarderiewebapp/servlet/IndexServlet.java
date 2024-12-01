@@ -43,7 +43,6 @@ public class IndexServlet extends HttpServlet {
             Employee emp = empDAO.getById(Integer.parseInt(req.getParameter("numEmp")));
             try {
                 if (PasswordHasher.validatePassword(req.getParameter("password"), emp.getPasswordHash())) {
-//                    req.setAttribute("employee", emp);
                     resp.sendRedirect("home?emp=" + URLEncoder.encode(emp.getEmpFirstName() + " " + emp.getEmpLastName(), "UTF-8"));
                 } else {
                     req.setAttribute("message", "Le mot de passe est incorrect");
